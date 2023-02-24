@@ -23,7 +23,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
 
   const loadTodos = async () => {
     const loadedTodos = await requestLoadTodos();
-    setTodos(loadedTodos);
+    setTodos(loadedTodos.reverse());
   };
 
   useEffect(() => {
