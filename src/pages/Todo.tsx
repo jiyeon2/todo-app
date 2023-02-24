@@ -1,4 +1,4 @@
-import LogoutButton from 'components/common/LogoutButton';
+import LogoutButton from 'components/auth/LogoutButton';
 import TodoAddSection from 'components/todo/TodoAddSection';
 import TodoList from 'components/todo/TodoList';
 import { TodoProvider } from 'context/todoContext';
