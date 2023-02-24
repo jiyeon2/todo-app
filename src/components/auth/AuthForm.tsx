@@ -1,22 +1,24 @@
 import Input from 'components/common/Input';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useAuthForm from './hooks/useAuthForm';
 import { AuthData } from './types/auth.types';
 
 const AuthForm = ({
-  labels,
+  title,
+  link,
+  submitButton,
   submitCallback,
-  testId,
 }: {
-  labels: { title: string; submitButton: string; link: string };
-  testId: { submitButton: string };
+  title: string;
+  link: { label: string; to: string };
+  submitButton: { label: string; testId?: string };
   submitCallback: (authData: AuthData) => void;
 }) => {
   const { formState, handleInputChange, errors, isAllValid, handleSubmit } = useAuthForm();
   const submitHandler = handleSubmit(submitCallback);
   return (
     <form onSubmit={submitHandler} className="flex flex-col items-center justify-between gap-y-4">
-      <p className="text-2xl">{labels.title}</p>
+      <p className="text-2xl">{title}</p>
       <Input
         name="email"
         type="email"
@@ -41,18 +43,13 @@ const AuthForm = ({
         className="h-10 rounded-md bg-teal-400 px-6 font-semibold text-white hover:bg-teal-600 disabled:bg-slate-600"
         type="submit"
         disabled={!isAllValid}
-        data-testid={testId.submitButton}
+        data-testid={submitButton.testId}
       >
-        {labels.submitButton}
+        {submitButton.label}
       </button>
-      <NavLink
-        to={'signup'}
-        className={({ isActive }) =>
-          ` text-gray-500 hover:underline ${isActive ? 'underline' : ''}`
-        }
-      >
-        {labels.link}
-      </NavLink>
+      <Link to={link.to} className={`text-gray-500 hover:underline`}>
+        {link.label}
+      </Link>
     </form>
   );
 };
