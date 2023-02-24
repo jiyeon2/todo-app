@@ -1,4 +1,4 @@
-import { AuthProvider } from 'context/authContext';
+import { AuthProvider } from 'contexts/authContext';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';

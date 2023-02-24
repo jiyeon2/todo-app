@@ -1,5 +1,5 @@
 import AuthForm from 'components/auth/AuthForm';
-import { AuthContext } from 'context/authContext';
+import { AuthContext } from 'contexts/authContext';
 import { useContext } from 'react';
 
 const Signin = () => {
@@ -7,7 +7,9 @@ const Signin = () => {
 
   return (
     <AuthForm
-      labels={{ title: '로그인', submitButton: '로그인', link: '회원가입 하러 가기' }}
+      title="로그인"
+      link={{ label: '회원가입 하러 가기', to: '/signup' }}
+      submitButton={{ label: '로그인', testId: 'signin-button' }}
       submitCallback={login}
     />
   );

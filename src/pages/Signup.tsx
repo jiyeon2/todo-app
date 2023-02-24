@@ -8,7 +8,9 @@ const Signup = () => {
 
   return (
     <AuthForm
-      labels={{ title: '회원가입', submitButton: '제출', link: '로그인 하러 가기' }}
+      title="회원가입"
+      link={{ label: '로그인 하러 가기', to: '/signin' }}
+      submitButton={{ label: '제출', testId: 'signup-button' }}
       submitCallback={(authData) =>
         signup(authData).then(() => {
           navigate('/signin');
