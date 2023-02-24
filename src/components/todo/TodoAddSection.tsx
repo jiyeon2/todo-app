@@ -1,16 +1,13 @@
-import Input from 'components/common/Input';
-import React, { useContext, useState } from 'react';
 import { PlusIcon } from '@heroicons/react/24/solid';
 import IconButton from 'components/common/IconButton';
+import Input from 'components/common/Input';
 import { TodoContext } from 'context/todoContext';
+import useInput from 'hooks/useInput';
+import React, { useContext } from 'react';
 
 const TodoAddSection = () => {
   const { addTodo } = useContext(TodoContext);
-  const [content, setContent] = useState<string>('');
-
-  const handleInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setContent(e.currentTarget.value);
-  };
+  const { value: content, setValue: setContent, handleInput } = useInput();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
