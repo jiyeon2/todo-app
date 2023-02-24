@@ -1,3 +1,4 @@
+import LogoutButton from 'components/common/LogoutButton';
 import TodoAddSection from 'components/todo/TodoAddSection';
 import TodoList from 'components/todo/TodoList';
 import { TodoProvider } from 'context/todoContext';
@@ -5,7 +6,8 @@ import { TodoProvider } from 'context/todoContext';
 const Todo = () => {
   return (
     <TodoProvider>
-      <div>
+      <div className="flex flex-col gap-4">
+        <LogoutButton className="self-end rounded-md bg-blue-400 p-1 text-white hover:bg-blue-600" />
         <TodoAddSection />
         <TodoList />
       </div>
