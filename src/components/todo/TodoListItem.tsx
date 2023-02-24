@@ -1,14 +1,13 @@
-import { TodoData } from 'apis/todo/types/todo.types';
-import React, { useContext, useState } from 'react';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { TodoData } from 'apis/todo/types/todo.types';
 import IconButton from 'components/common/IconButton';
-import { TodoListItemCheckbox } from './TodoListItemCheckbox';
-import { TodoItemEditSection } from './TodoItemEditSection';
 import { TodoContext } from 'context/todoContext';
+import { useContext } from 'react';
+import { TodoItemEditSection } from './TodoItemEditSection';
+import { TodoListItemCheckbox } from './TodoListItemCheckbox';
 
 export function TodoListItem({ todo }: { todo: TodoData }) {
-  const [editMode, setEditMode] = useState(false);
-  const { deleteTodo } = useContext(TodoContext);
+  const { deleteTodo, editingTodo, finishEditingTodo, startEditingTodo } = useContext(TodoContext);
 
   const handleDeleteButton = () => {
     const confirmed = window.confirm('정말 삭제하시겠습니까?');
@@ -16,15 +15,8 @@ export function TodoListItem({ todo }: { todo: TodoData }) {
       deleteTodo({ id: todo.id });
     }
   };
-  if (editMode) {
-    return (
-      <TodoItemEditSection
-        todo={todo}
-        finishEditMode={() => {
-          setEditMode(false);
-        }}
-      />
-    );
+  if (editingTodo && editingTodo.id === todo.id) {
+    return <TodoItemEditSection todo={todo} finishEditMode={finishEditingTodo} />;
   }
   return (
     <article className="flex items-center gap-2 text-lg">
@@ -34,7 +26,7 @@ export function TodoListItem({ todo }: { todo: TodoData }) {
       <IconButton
         size="sm"
         onClick={() => {
-          setEditMode((prev) => !prev);
+          startEditingTodo(todo);
         }}
       >
         <PencilIcon className="text-white" />

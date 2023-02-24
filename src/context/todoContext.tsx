@@ -14,18 +14,33 @@ export type TodoContextType = {
   addTodo: (todoContent: TodoData['todo']) => Promise<void>;
   editTodo: (editData: Pick<TodoData, 'id' | 'todo' | 'isCompleted'>) => Promise<void>;
   deleteTodo: (deleteData: Pick<TodoData, 'id'>) => Promise<void>;
+
+  editingTodo: TodoData | null;
+  startEditingTodo: (todo: TodoData) => void;
+  finishEditingTodo: () => void;
 };
 
 export const TodoContext = createContext<TodoContextType>({
   todos: [],
+  editingTodo: null,
   loadTodos: async () => {},
   addTodo: async (todoContent) => {},
   editTodo: async (editData) => {},
   deleteTodo: async (deleteData) => {},
+  startEditingTodo: (todo: TodoData) => {},
+  finishEditingTodo: () => {},
 });
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [todos, setTodos] = useState<TodoData[]>([]);
+  const [editingTodo, setEditingTodo] = useState<TodoData | null>(null);
+
+  const startEditingTodo = (todo: TodoData) => {
+    setEditingTodo(todo);
+  };
+  const finishEditingTodo = () => {
+    setEditingTodo(null);
+  };
 
   const loadTodos = async () => {
     try {
@@ -68,7 +83,18 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <TodoContext.Provider value={{ todos, loadTodos, addTodo, editTodo, deleteTodo }}>
+    <TodoContext.Provider
+      value={{
+        todos,
+        loadTodos,
+        addTodo,
+        editTodo,
+        deleteTodo,
+        editingTodo,
+        startEditingTodo,
+        finishEditingTodo,
+      }}
+    >
       {children}
     </TodoContext.Provider>
   );
