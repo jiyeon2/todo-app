@@ -1,7 +1,7 @@
 import { PlusIcon } from '@heroicons/react/24/solid';
 import IconButton from 'components/common/IconButton';
 import Input from 'components/common/Input';
-import { TodoContext } from 'context/todoContext';
+import { TodoContext } from 'contexts/todoContext';
 import useInput from 'hooks/useInput';
 import React, { useContext } from 'react';
 

@@ -1,5 +1,5 @@
 import AuthForm from 'components/auth/AuthForm';
-import { AuthContext } from 'context/authContext';
+import { AuthContext } from 'contexts/authContext';
 import { useContext } from 'react';
 
 const Signin = () => {

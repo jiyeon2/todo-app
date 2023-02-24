@@ -4,7 +4,7 @@ import { ArrowUturnLeftIcon, ArchiveBoxArrowDownIcon } from '@heroicons/react/24
 import IconButton from 'components/common/IconButton';
 import { TodoListItemCheckbox } from './TodoListItemCheckbox';
 import useInput from 'hooks/useInput';
-import { TodoContext } from 'context/todoContext';
+import { TodoContext } from 'contexts/todoContext';
 
 export function TodoItemEditSection({
   todo,

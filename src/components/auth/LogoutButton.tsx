@@ -1,4 +1,4 @@
-import { AuthContext } from 'context/authContext';
+import { AuthContext } from 'contexts/authContext';
 import React, { useContext } from 'react';
 
 interface LogoutButtonProps

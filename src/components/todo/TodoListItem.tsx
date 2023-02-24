@@ -1,7 +1,7 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { TodoData } from 'apis/todo/types/todo.types';
 import IconButton from 'components/common/IconButton';
-import { TodoContext } from 'context/todoContext';
+import { TodoContext } from 'contexts/todoContext';
 import { useContext } from 'react';
 import { TodoItemEditSection } from './TodoItemEditSection';
 import { TodoListItemCheckbox } from './TodoListItemCheckbox';

@@ -1,6 +1,6 @@
 import { TodoData } from 'apis/todo/types/todo.types';
 import React, { useContext } from 'react';
-import { TodoContext } from 'context/todoContext';
+import { TodoContext } from 'contexts/todoContext';
 
 export function TodoListItemCheckbox({ todo }: { todo: TodoData }) {
   const { editTodo } = useContext(TodoContext);

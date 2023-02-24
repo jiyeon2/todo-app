@@ -1,7 +1,7 @@
 import LogoutButton from 'components/auth/LogoutButton';
 import TodoAddSection from 'components/todo/TodoAddSection';
 import TodoList from 'components/todo/TodoList';
-import { TodoProvider } from 'context/todoContext';
+import { TodoProvider } from 'contexts/todoContext';
 
 const Todo = () => {
   return (
