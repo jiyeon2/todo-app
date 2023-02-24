@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 type IconButtonSize = 'sm' | 'md';
 type IconButtonVariant = 'normal' | 'warning';
@@ -13,13 +13,18 @@ interface IconButtonProps
 }
 
 const IconButton = ({ size = 'md', variant = 'normal', children, ...rest }: IconButtonProps) => {
-  const sizeNumber = { sm: 8, md: 10 }[size];
-  const bgColor = { normal: 'teal', warning: 'rose' }[variant];
+  const className = useMemo(() => {
+    const sizeNumber = { sm: 8, md: 10 }[size];
+    const bgValue = { normal: 'teal', warning: 'rose' }[variant];
+
+    const sizeClasses = [`h-${sizeNumber}`, `w-${sizeNumber}`];
+    const bgClasses = [`bg-${bgValue}-300`, `hover:bg-${bgValue}-600`];
+    const restClasses = ['rounded-md', 'p-2', 'text-center', 'disabled:bg-slate-600'];
+
+    return [...sizeClasses, ...bgClasses, ...restClasses].join(' ');
+  }, [size, variant]);
   return (
-    <button
-      className={`h-${sizeNumber} w-${sizeNumber} rounded-md bg-${bgColor}-300 p-2 text-center hover:bg-${bgColor}-600 disabled:bg-slate-600`}
-      {...rest}
-    >
+    <button className={className} {...rest}>
       {children}
     </button>
   );
