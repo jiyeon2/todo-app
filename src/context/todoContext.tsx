@@ -1,4 +1,9 @@
-import { requestCreateTodo, requestLoadTodos, requestUpdateTodo } from 'apis/todo';
+import {
+  requestCreateTodo,
+  requestDeleteTodo,
+  requestLoadTodos,
+  requestUpdateTodo,
+} from 'apis/todo';
 import { TodoData } from 'apis/todo/types/todo.types';
 import { createContext, useEffect, useState } from 'react';
 
@@ -48,7 +53,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const deleteTodo = async (deleteData: Pick<TodoData, 'id'>) => {};
+  const deleteTodo = async (deleteData: Pick<TodoData, 'id'>) => {
+    try {
+      await requestDeleteTodo(deleteData);
+      loadTodos();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <TodoContext.Provider value={{ todos, loadTodos, addTodo, editTodo, deleteTodo }}>

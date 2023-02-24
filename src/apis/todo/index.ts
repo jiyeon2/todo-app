@@ -41,3 +41,9 @@ export function requestUpdateTodo({
     return new Promise((res, rej) => res(updatedTodo));
   });
 }
+
+export function requestDeleteTodo({ id }: Pick<TodoData, 'id'>): Promise<any> {
+  return todoClient.delete(`${id}`).then((res: AxiosResponse<void>) => {
+    return new Promise((res, rej) => res('delete done'));
+  });
+}
