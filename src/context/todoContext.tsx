@@ -1,13 +1,13 @@
-import { requestLoadTodos } from 'apis/todo';
+import { requestCreateTodo, requestLoadTodos } from 'apis/todo';
 import { TodoData } from 'apis/todo/types/todo.types';
 import { createContext, useEffect, useState } from 'react';
 
 export type TodoContextType = {
   todos: TodoData[];
   loadTodos: () => Promise<void>;
-  addTodo: (todoContent: string) => Promise<void>;
-  editTodo: (editData: { todoId: number; todoContent: string }) => Promise<void>;
-  deleteTodo: (deleteData: { todoId: number }) => Promise<void>;
+  addTodo: (todoContent: TodoData['todo']) => Promise<void>;
+  editTodo: (editData: Pick<TodoData, 'id' | 'todo'>) => Promise<void>;
+  deleteTodo: (deleteData: Pick<TodoData, 'id'>) => Promise<void>;
 };
 
 export const TodoContext = createContext<TodoContextType>({
@@ -23,7 +23,6 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
 
   const loadTodos = async () => {
     const loadedTodos = await requestLoadTodos();
-    console.log({ loadedTodos });
     setTodos(loadedTodos);
   };
 
@@ -31,11 +30,18 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     loadTodos();
   }, []);
 
-  const addTodo = async (todoContent: string) => {};
+  const addTodo = async (todoContent: TodoData['todo']) => {
+    try {
+      await requestCreateTodo(todoContent);
+      loadTodos();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const editTodo = async (editData: { todoId: number; todoContent: string }) => {};
+  const editTodo = async (editData: Pick<TodoData, 'id' | 'todo'>) => {};
 
-  const deleteTodo = async (deleteData: { todoId: number }) => {};
+  const deleteTodo = async (deleteData: Pick<TodoData, 'id'>) => {};
 
   return (
     <TodoContext.Provider value={{ todos, loadTodos, addTodo, editTodo, deleteTodo }}>
