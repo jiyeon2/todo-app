@@ -7,6 +7,7 @@ import {
   ArchiveBoxArrowDownIcon,
 } from '@heroicons/react/24/solid';
 import IconButton from 'components/common/IconButton';
+import { TodoListItemCheckbox } from './TodoListItemCheckbox';
 
 export function TodoListItem({ todo }: { todo: TodoData }) {
   const [editMode, setEditMode] = useState(false);
@@ -23,7 +24,7 @@ export function TodoListItem({ todo }: { todo: TodoData }) {
   }
   return (
     <article className="flex items-center gap-2 text-lg">
-      <input type="checkbox" />
+      <TodoListItemCheckbox todo={todo} />
       <p className="flex-1">{todo.todo}</p>
 
       <IconButton
@@ -51,7 +52,7 @@ function TodoItemEditSection({
 }) {
   return (
     <article className="flex items-center gap-2 text-lg">
-      <input type="checkbox" />
+      <TodoListItemCheckbox todo={todo} />
       <input className="flex-1 rounded-md ring-2 ring-black" defaultValue={todo.todo} autoFocus />
       <IconButton size="sm">
         <ArchiveBoxArrowDownIcon className="text-white" />
