@@ -30,3 +30,14 @@ export function requestCreateTodo(todo: TodoData['todo']): Promise<TodoData> {
     return new Promise((res, rej) => res(createdTodo));
   });
 }
+
+export function requestUpdateTodo({
+  id,
+  todo,
+  isCompleted,
+}: Pick<TodoData, 'id' | 'todo' | 'isCompleted'>): Promise<TodoData> {
+  return todoClient.put(`${id}`, { todo, isCompleted }).then((res: AxiosResponse<TodoData>) => {
+    const updatedTodo = res.data;
+    return new Promise((res, rej) => res(updatedTodo));
+  });
+}

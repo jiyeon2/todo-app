@@ -4,6 +4,6 @@
 export type TodoData = {
   id: number;
   todo: string;
-  isComplete: boolean;
+  isCompleted: boolean;
   userId: number;
 };
