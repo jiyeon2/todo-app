@@ -24,8 +24,9 @@ const TodoAddSection = () => {
           placeholder="코딩하기..."
           value={content}
           onChange={handleInput}
+          data-testid="new-todo-input"
         />
-        <IconButton type="submit">
+        <IconButton type="submit" data-testid="new-todo-add-button">
           <PlusIcon className="text-white" />
         </IconButton>
       </form>

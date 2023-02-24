@@ -33,13 +33,14 @@ export function TodoItemEditSection({
           autoFocus
           value={value}
           onChange={handleInput}
+          data-testid="modify-input"
         />
-        <IconButton size="sm" type="submit">
+        <IconButton size="sm" type="submit" data-testid="submit-button">
           <ArchiveBoxArrowDownIcon className="text-white" />
         </IconButton>
       </form>
 
-      <IconButton size="sm" variant="warning" onClick={finishEditMode}>
+      <IconButton size="sm" variant="warning" onClick={finishEditMode} data-testid="cancel-button">
         <ArrowUturnLeftIcon className="text-white" />
       </IconButton>
     </article>

@@ -9,6 +9,7 @@ const Signup = () => {
   return (
     <AuthForm
       labels={{ title: '회원가입', submitButton: '제출', link: '로그인 하러 가기' }}
+      testId={{ submitButton: 'signup-button' }}
       submitCallback={(authData) =>
         signup(authData).then(() => {
           navigate('/signin');

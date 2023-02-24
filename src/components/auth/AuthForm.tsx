@@ -6,8 +6,10 @@ import { AuthData } from './types/auth.types';
 const AuthForm = ({
   labels,
   submitCallback,
+  testId,
 }: {
   labels: { title: string; submitButton: string; link: string };
+  testId: { submitButton: string };
   submitCallback: (authData: AuthData) => void;
 }) => {
   const { formState, handleInputChange, errors, isAllValid, handleSubmit } = useAuthForm();
@@ -23,6 +25,7 @@ const AuthForm = ({
         value={formState.email}
         onChange={handleInputChange}
         errors={errors.email}
+        data-testid="email-input"
       />
       <Input
         name="password"
@@ -32,11 +35,13 @@ const AuthForm = ({
         value={formState.password}
         onChange={handleInputChange}
         errors={errors.password}
+        data-testid="password-input"
       />
       <button
         className="h-10 rounded-md bg-teal-400 px-6 font-semibold text-white hover:bg-teal-600 disabled:bg-slate-600"
         type="submit"
         disabled={!isAllValid}
+        data-testid={testId.submitButton}
       >
         {labels.submitButton}
       </button>

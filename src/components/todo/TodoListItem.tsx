@@ -24,6 +24,7 @@ export function TodoListItem({ todo }: { todo: TodoData }) {
       <p className="flex-1">{todo.todo}</p>
 
       <IconButton
+        data-testid="modify-button"
         size="sm"
         onClick={() => {
           startEditingTodo(todo);
@@ -32,7 +33,12 @@ export function TodoListItem({ todo }: { todo: TodoData }) {
         <PencilIcon className="text-white" />
       </IconButton>
 
-      <IconButton size="sm" variant="warning" onClick={handleDeleteButton}>
+      <IconButton
+        size="sm"
+        variant="warning"
+        onClick={handleDeleteButton}
+        data-testid="delete-button"
+      >
         <TrashIcon className="text-white" />
       </IconButton>
     </article>

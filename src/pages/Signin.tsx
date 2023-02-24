@@ -8,6 +8,7 @@ const Signin = () => {
   return (
     <AuthForm
       labels={{ title: '로그인', submitButton: '로그인', link: '회원가입 하러 가기' }}
+      testId={{ submitButton: 'signin-button' }}
       submitCallback={login}
     />
   );
