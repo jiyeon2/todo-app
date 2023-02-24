@@ -6,6 +6,7 @@ import {
 } from 'apis/todo';
 import { TodoData } from 'apis/todo/types/todo.types';
 import { createContext, useEffect, useState } from 'react';
+import { handleError } from 'utils/errorHandler';
 
 export type TodoContextType = {
   todos: TodoData[];
@@ -27,8 +28,12 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [todos, setTodos] = useState<TodoData[]>([]);
 
   const loadTodos = async () => {
-    const loadedTodos = await requestLoadTodos();
-    setTodos(loadedTodos.reverse());
+    try {
+      const loadedTodos = await requestLoadTodos();
+      setTodos(loadedTodos.reverse());
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   useEffect(() => {
@@ -40,7 +45,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       await requestCreateTodo(todoContent);
       loadTodos();
     } catch (error) {
-      console.error(error);
+      handleError(error);
     }
   };
 
@@ -49,7 +54,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       await requestUpdateTodo(editData);
       loadTodos();
     } catch (error) {
-      console.error(error);
+      handleError(error);
     }
   };
 
@@ -58,7 +63,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       await requestDeleteTodo(deleteData);
       loadTodos();
     } catch (error) {
-      console.error(error);
+      handleError(error);
     }
   };
 

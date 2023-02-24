@@ -9,7 +9,6 @@ export const authClient = axios.create({
 });
 
 export function requestLogin(body: AuthData): Promise<{ token: string }> {
-  // TODO : 에러처리
   return authClient.post('signin', body).then((res: AxiosResponse<LoginResponseType>) => {
     const { access_token } = res.data;
     return new Promise((res, rej) => res({ token: access_token }));
