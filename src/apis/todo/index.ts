@@ -1,10 +1,11 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { getToken } from 'utils/localStorage';
+import { TodoData } from './types/todo.types';
 
 const baseURL = 'https://pre-onboarding-selection-task.shop';
 
 export const todoClient = axios.create({
-  baseURL: `${baseURL}/todo/`,
+  baseURL: `${baseURL}/todos`,
 });
 
 todoClient.interceptors.request.use((config) => {
@@ -15,3 +16,11 @@ todoClient.interceptors.request.use((config) => {
 
   return config;
 });
+
+export function requestLoadTodos(): Promise<TodoData[]> {
+  return todoClient.get('').then((res: AxiosResponse<TodoData[]>) => {
+    console.log(res);
+    const todos = res.data;
+    return new Promise((res, rej) => res(todos));
+  });
+}
