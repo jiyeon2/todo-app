@@ -19,8 +19,14 @@ todoClient.interceptors.request.use((config) => {
 
 export function requestLoadTodos(): Promise<TodoData[]> {
   return todoClient.get('').then((res: AxiosResponse<TodoData[]>) => {
-    console.log(res);
     const todos = res.data;
     return new Promise((res, rej) => res(todos));
+  });
+}
+
+export function requestCreateTodo(todo: TodoData['todo']): Promise<TodoData> {
+  return todoClient.post('', { todo }).then((res: AxiosResponse<TodoData>) => {
+    const createdTodo = res.data;
+    return new Promise((res, rej) => res(createdTodo));
   });
 }
