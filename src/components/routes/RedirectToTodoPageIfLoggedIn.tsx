@@ -5,7 +5,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 const RedirectToTodoPageIfLoggedIn = () => {
   const { isLoggedIn } = useContext(AuthContext);
   if (isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/todo" />;
   }
   return (
     <>
