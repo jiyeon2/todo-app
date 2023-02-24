@@ -5,8 +5,10 @@ import { TodoProvider } from 'context/todoContext';
 const Todo = () => {
   return (
     <TodoProvider>
-      <TodoAddSection />
-      <TodoList />
+      <div>
+        <TodoAddSection />
+        <TodoList />
+      </div>
     </TodoProvider>
   );
 };
