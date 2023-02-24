@@ -1,4 +1,4 @@
-import { requestCreateTodo, requestLoadTodos } from 'apis/todo';
+import { requestCreateTodo, requestLoadTodos, requestUpdateTodo } from 'apis/todo';
 import { TodoData } from 'apis/todo/types/todo.types';
 import { createContext, useEffect, useState } from 'react';
 
@@ -6,7 +6,7 @@ export type TodoContextType = {
   todos: TodoData[];
   loadTodos: () => Promise<void>;
   addTodo: (todoContent: TodoData['todo']) => Promise<void>;
-  editTodo: (editData: Pick<TodoData, 'id' | 'todo'>) => Promise<void>;
+  editTodo: (editData: Pick<TodoData, 'id' | 'todo' | 'isCompleted'>) => Promise<void>;
   deleteTodo: (deleteData: Pick<TodoData, 'id'>) => Promise<void>;
 };
 
@@ -39,7 +39,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const editTodo = async (editData: Pick<TodoData, 'id' | 'todo'>) => {};
+  const editTodo = async (editData: Pick<TodoData, 'id' | 'todo' | 'isCompleted'>) => {
+    try {
+      await requestUpdateTodo(editData);
+      loadTodos();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const deleteTodo = async (deleteData: Pick<TodoData, 'id'>) => {};
 
